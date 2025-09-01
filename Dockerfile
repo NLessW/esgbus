@@ -37,8 +37,8 @@ WORKDIR /var/www/html
 # Copy project files first (including app/helpers.php)
 COPY . .
 
-# Install Node.js dependencies
-RUN npm install --production --no-audit --no-fund
+# Install Node.js dependencies (including dev dependencies for build)
+RUN npm install
 
 # Install PHP dependencies (now app/helpers.php exists)
 RUN composer install --no-dev --optimize-autoloader --no-interaction
