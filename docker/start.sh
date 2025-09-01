@@ -13,13 +13,13 @@ php artisan cache:clear || true
 php artisan route:clear || true
 php artisan view:clear || true
 
+# Rebuild database schema if there are pending migrations
+php artisan migrate --force || true
+
 # Rebuild caches using current Railway env vars
 php artisan config:cache || true
 php artisan route:cache || true
 php artisan view:cache || true
-
-# Optionally run migrations (uncomment if desired)
-# php artisan migrate --force || true
 
 # Start PHP built-in server
 exec php -S 0.0.0.0:8000 -t public
