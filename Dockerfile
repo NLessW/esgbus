@@ -51,16 +51,11 @@ RUN chown -R www-data:www-data /var/www/html \
     && chmod -R 755 /var/www/html/storage \
     && chmod -R 755 /var/www/html/bootstrap/cache
 
-# Create storage link
-RUN php artisan storage:link
-
-# Optimize Laravel
-RUN php artisan config:cache \
-    && php artisan route:cache \
-    && php artisan view:cache
+# Make start script executable
+RUN chmod +x docker/start.sh
 
 # Expose port
 EXPOSE 8000
 
 # Start command
-CMD ["php", "-S", "0.0.0.0:8000", "-t", "public"]
+CMD ["sh", "docker/start.sh"]
