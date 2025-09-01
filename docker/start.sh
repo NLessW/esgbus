@@ -4,6 +4,12 @@ set -e
 # Navigate to app root
 cd /var/www/html
 
+# If APP_URL is set but http, switch to https (Railway terminates TLS)
+if [ -n "$APP_URL" ]; then
+  APP_URL=$(echo "$APP_URL" | sed 's#^http://#https://#')
+  export APP_URL
+fi
+
 # Ensure storage symlink exists (ignore if already present)
 php artisan storage:link || true
 
