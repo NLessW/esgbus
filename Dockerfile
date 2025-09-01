@@ -13,7 +13,9 @@ RUN apk add --no-cache \
     libjpeg-turbo-dev \
     freetype-dev \
     libzip-dev \
-    oniguruma-dev
+    oniguruma-dev \
+    icu-dev \
+    libexif-dev
 
 # Install PHP extensions
 RUN docker-php-ext-configure gd --with-freetype --with-jpeg \
@@ -22,7 +24,9 @@ RUN docker-php-ext-configure gd --with-freetype --with-jpeg \
         mbstring \
         zip \
         gd \
-        bcmath
+        bcmath \
+        intl \
+        exif
 
 # Install Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
